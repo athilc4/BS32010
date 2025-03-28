@@ -1,0 +1,13 @@
+{
+	"n_targets": 5287,
+	"n_bootstraps": 100,
+	"n_processed": 33602626,
+	"n_pseudoaligned": 20394349,
+	"n_unique": 20136959,
+	"p_pseudoaligned": 60.7,
+	"p_unique": 59.9,
+	"kallisto_version": "0.48.0",
+	"index_version": 10,
+	"start_time": "Tue Feb 28 17:35:45 2023",
+	"call": "kallisto quant -b 100 -i reference_data/sakai_transcripts.idx -o kallisto/18MM-1 -l 200 -s 20 QC/trim_galore/18MM-1_1_val_1.fq.gz QC/trim_galore/18MM-1_2_val_2.fq.gz"
+}
