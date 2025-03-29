@@ -1,0 +1,93 @@
+---
+title: "report_plots"
+author: "Athina Chatziplis"
+date: "2025-03-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+pca<-prcomp(t(norm_counts))
+
+fviz_pca_ind(pca,
+             palette=c('blue','orange'),
+             geom='point',
+             habillage = groups,
+             title='PCA Plot')
+```
+
+```{r}
+fviz_eig(pca)
+
+```
+
+```{r}
+pvc<-pvclust(norm_counts,nboot=100)
+plot(pvc, col.pv=c(si='black',au='blue',bp='orange',edge='black'))
+
+```
+
+```{r}
+corr=cor(norm_counts,method='pearson')
+heatmaply_cor(corr,
+              limits=c(min(corr),max(corr)), 
+              colors=viridis, 
+              main='Sample Heatmap',
+              margins=c(10,10,50,10))
+```
+
+```{r}
+hist(res$pvalue,breaks=20)
+hist(res$padj,breaks=20)
+
+```
+
+```{r}
+DESeq2::plotMA(res, alpha=0.05, ylim=c(-7,7))
+
+```
+
+```{r}
+p<-EnhancedVolcano(res, lab = rownames(res),
+                 x = 'log2FoldChange',
+                 y = 'pvalue',
+                 col=c('gray40','blue','black','orange'),
+                labSize = 3, 
+                title="Volcano plot", 
+                titleLabSize = 12,
+                axisLabSize = 10,
+                subtitle="",
+                subtitleLabSize = 0,
+                legendLabSize = 10, 
+                legendIconSize = 2, 
+                legendPosition = "bottom",
+                captionLabSize = 8, 
+                drawConnectors = TRUE)
+```
+
+```{r}
+
+```
